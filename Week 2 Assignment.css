@@ -1,0 +1,226 @@
+/*Set the scene*/
+:root {
+    --primary-color: #794899;
+    --secondary-color: #f44336;
+    --tertiary-color: #131212;
+    --background-color: #f0f0f0;
+    --text-color: #080808;
+}
+/*Went with a purple background. Don't know why*/
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    display: flex;
+    transition: all 0.3s ease-in-out;
+}
+
+h1 {
+    color: var(--secondary-color);
+}
+/*For all the buttons*/
+button {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+button:hover {
+    background-color: #d32f2f;
+}
+/*Now we get to the good stuff. First, analogue*/
+.container {
+   display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 60px;
+}
+.container .centrepoint {
+    display: flex;
+    height: 400px;
+    width: 400px;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--background-color);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2), 0 25px 45px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+/*Let's make the numbers circle the circle*/ 
+.centrepoint .numbers {
+    position: absolute;
+    inset: 20px;
+    text-align: center;
+    transform: rotate(calc(var(--i) * 360deg / 12));
+}
+/*Give it more personality*/
+.centrepoint .numbers span {
+    display: inline-block;
+    transform: rotate(calc(var(--i) * -360deg / 12));
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--text-color);
+}
+/*Time for the clock-hands/indicators*/
+.container .analogue {
+  position: absolute;
+  height: 10px;
+  width: 10px;
+  display: flex;
+  justify-content: center;
+}
+.analogue .clock {
+  position: absolute;
+  height: 130px;
+  width: 4px;
+  bottom: 0;
+  border-radius: 25px;
+  transform-origin: bottom;
+  background: var(--secondary-color);
+}
+
+/*For all the hands*/
+.clock.hour {
+  height: 100px;
+  width: 8px;
+  background: var(--tertiary-color);
+}
+.clock.minute {
+  height: 120px;
+  width: 5px;
+  background-color: #43026e;
+}
+
+.analogue::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  z-index: 100;
+  background: var(--tertiary-color);
+  border: 4px solid var(--primary-color);
+}
+/*For light-dark mode*/
+/*Toggle switch button design*/
+body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+/*Model-switch-container between analogue and digital*/
+.clock-mode {
+  position: relative;
+  height: 50px;
+  width: 60px;
+  border-radius: 100px;
+  background-color: var(--background-color);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  margin-bottom: 450px;
+  margin-right: 5px;
+}
+.clock-mode:hover {
+    background-color: #680202;
+}
+.clock-mode::before {
+  content: "Switch";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  line-height: 50px;
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--text-color);
+}
+.clock-mode:hover::before {
+    color: #ffeb3b;
+}
+
+.clock-mode.dark {
+    background-color: #333;
+    color: #fff;
+}
+
+/*Digital clock design*/
+.digital.dark {
+    background-color: #333;
+    color: #fff;
+}
+
+.digital{
+  height: 100px;
+  width: 360px;
+  position: relative;
+  background: linear-gradient(135deg, #14ffe9, #ffeb3b, #ff00e0);
+  border-radius: 10px;
+  cursor: default;
+  animation: animate 1.5s linear infinite;
+}
+.digital .display,
+.digital{
+  position: absolute;
+  top: 50%;
+  left: 36%;
+  transform: translate(-50%, -50%);
+}
+.digital .display{
+  z-index: 999;
+  height: 85px;
+  width: 345px;
+  background: rgb(245, 245, 245);
+  border-radius: 6px;
+  text-align: center;
+}
+.display #hours{
+  line-height: 85px;
+  color: var(--tertiary-color);
+  font-size: 52px;
+  font-weight: bolder;
+  letter-spacing: 1px;
+  background: linear-gradient(135deg, #14ffe9, #ffeb3b, #ff00e0);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: animate 1.5s linear infinite;
+}
+@keyframes animate {
+  100%{
+    filter: hue-rotate(360deg);
+  }
+}
+.digital span{
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+  background: inherit;
+}
+.digital span:first-child{
+  filter: blur(7px);
+}
+.digital span:last-child{
+  filter: blur(20px);
+}
+
+.colon {
+    font-size: 52px;
+    font-weight: bolder;
+    color: var(--tertiary-color);
+    line-height: 85px;
+    animation: animate 1.5s linear infinite;
+}
+
+#clocking {
+ position: relative;
+  text-align: center;
+  margin-top: 450px;
+}
+  
